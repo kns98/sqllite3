@@ -2,15 +2,8 @@
 
 using System;
 using System.Diagnostics;
-using Bitmask = System.UInt64;
-using i64 = System.Int64;
-using u8 = System.Byte;
-using u32 = System.UInt32;
-using u16 = System.UInt16;
-using Pgno = System.UInt32;
 
 #if !SQLITE_MAX_VARIABLE_NUMBER
-using ynVar = System.Int16;
 
 #else
 using ynVar = System.Int32;

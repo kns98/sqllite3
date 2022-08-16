@@ -4,13 +4,6 @@ using System.Text;
 
 namespace Community.CsharpSqlite
 {
-    using etByte = Boolean;
-    using i64 = Int64;
-    using u64 = UInt64;
-    using LONGDOUBLE_TYPE = Double;
-    using sqlite_u3264 = UInt64;
-    using va_list = Object;
-
     public partial class Sqlite3
     {
         /*

@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Threading;
-using DWORD = System.Int32;
 
 namespace Community.CsharpSqlite
 {

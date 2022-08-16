@@ -1,12 +1,8 @@
 using System;
 using System.Diagnostics;
-using u8 = System.Byte;
 
 namespace Community.CsharpSqlite
 {
-    using sqlite3_int64 = Int64;
-    using sqlite3_stmt = Sqlite3.Vdbe;
-
     public partial class Sqlite3
     {
 /*

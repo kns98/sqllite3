@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using u8 = System.Byte;
 
 namespace Community.CsharpSqlite
 {

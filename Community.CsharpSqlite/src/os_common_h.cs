@@ -1,5 +1,3 @@
-using va_list = System.Object;
-
 namespace Community.CsharpSqlite
 {
     public partial class Sqlite3

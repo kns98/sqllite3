@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using Pgno = System.UInt32;
-using u32 = System.UInt32;
 
 namespace Community.CsharpSqlite
 {

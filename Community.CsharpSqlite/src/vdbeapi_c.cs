@@ -2,16 +2,9 @@ using System;
 using System.Diagnostics;
 using System.Text;
 using i64 = System.Int64;
-using u16 = System.UInt16;
-using u32 = System.UInt32;
-using u64 = System.UInt64;
-using u8 = System.Byte;
-using sqlite3_int64 = System.Int64;
 
 namespace Community.CsharpSqlite
 {
-    using Op = Sqlite3.VdbeOp;
-    using sqlite_int64 = i64;
     using sqlite3_stmt = Sqlite3.Vdbe;
     using sqlite3_value = Sqlite3.Mem;
 

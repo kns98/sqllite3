@@ -4,14 +4,12 @@ using System.Text;
 
 using i64 = System.Int64;
 using u8 = System.Byte;
-
-using Pgno = System.UInt32;
 using sqlite3_int64 = System.Int64;
 using System.Globalization;
 
 namespace Community.CsharpSqlite
 {
-  public partial class Sqlite3
+    public partial class Sqlite3
   {
     /*
     ** 2003 April 6

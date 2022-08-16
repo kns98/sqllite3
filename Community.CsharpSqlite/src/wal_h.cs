@@ -1,7 +1,4 @@
-using u8 = System.Byte;
-using Pgno = System.UInt32;
 #if SQLITE_OMIT_WAL
-using Wal = System.Object;
 #endif
 
 namespace Community.CsharpSqlite

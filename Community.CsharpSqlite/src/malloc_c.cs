@@ -3,11 +3,6 @@ using System.Diagnostics;
 
 namespace Community.CsharpSqlite
 {
-    using sqlite3_int64 = Int64;
-    using i64 = Int64;
-    using sqlite3_uint64 = UInt64;
-    using u32 = UInt32;
-
     public partial class Sqlite3
     {
         /*

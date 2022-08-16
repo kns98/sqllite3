@@ -2,8 +2,6 @@ using System;
 
 namespace Community.CsharpSqlite
 {
-    using sqlite_u3264 = UInt64;
-
     public partial class Sqlite3
     {
         /*

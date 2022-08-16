@@ -13,9 +13,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using i64 = System.Int64;
-using u32 = System.UInt32;
-using time_t = System.Int64;
 
 namespace Community.CsharpSqlite
 {

@@ -1,15 +1,7 @@
 using System;
 using FILE = System.IO.TextWriter;
-using i64 = System.Int64;
-using u8 = System.Byte;
-using u16 = System.UInt16;
-using u32 = System.UInt32;
-using u64 = System.UInt64;
-using unsigned = System.UIntPtr;
-using Pgno = System.UInt32;
 
 #if !SQLITE_MAX_VARIABLE_NUMBER
-using ynVar = System.Int16;
 #else
 using ynVar = System.Int32;
 #endif
@@ -21,7 +13,6 @@ using ynVar = System.Int32;
 using yDbMask = System.Int64;
 #else
 //  typedef unsigned int yDbMask;
-using yDbMask = System.Int32;
 #endif
 
 

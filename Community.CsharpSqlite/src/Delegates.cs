@@ -7,9 +7,6 @@
 
 using System.Text;
 using HANDLE = System.IntPtr;
-using i16 = System.Int16;
-using sqlite3_int64 = System.Int64;
-using u32 = System.UInt32;
 
 
 namespace Community.CsharpSqlite

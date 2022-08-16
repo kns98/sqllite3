@@ -1,8 +1,5 @@
 using System.Diagnostics;
 using System.IO;
-using u8 = System.Byte;
-using YYCODETYPE = System.Int32;
-using YYACTIONTYPE = System.Int32;
 
 namespace Community.CsharpSqlite
 {

@@ -1,8 +1,4 @@
 using System.Diagnostics;
-using u8 = System.Byte;
-using u16 = System.UInt16;
-using u32 = System.UInt32;
-using sqlite3_int64 = System.Int64;
 
 namespace Community.CsharpSqlite
 {

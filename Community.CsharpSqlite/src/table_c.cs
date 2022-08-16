@@ -1,5 +1,3 @@
-using i64 = System.Int64;
-
 namespace Community.CsharpSqlite
 {
     public partial class Sqlite3

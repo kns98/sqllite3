@@ -1,13 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.Text;
-using i16 = System.Int16;
-using i64 = System.Int64;
-using u8 = System.Byte;
-using u16 = System.UInt16;
-using u32 = System.UInt32;
-using Pgno = System.UInt32;
-using sqlite3_int64 = System.Int64;
 
 namespace Community.CsharpSqlite
 {

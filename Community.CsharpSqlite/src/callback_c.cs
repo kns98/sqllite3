@@ -1,13 +1,8 @@
 using System;
 using System.Diagnostics;
-using i16 = System.Int16;
-using u8 = System.Byte;
-using u16 = System.UInt16;
 
 namespace Community.CsharpSqlite
 {
-    using sqlite3_value = Sqlite3.Mem;
-
     public partial class Sqlite3
     {
         /*
