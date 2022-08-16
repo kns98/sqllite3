@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{59E27BF3-3D31-42E5-BA21-FAEE135E699F}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Community.Data.SQLite.UnitTests</RootNamespace>
     <AssemblyName>Community.Data.SQLite.UnitTests</AssemblyName>
@@ -82,6 +82,10 @@
     <Compile Include="Stress.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Community.CsharpSqlite.Benchmark\Community.CsharpSqlite.Benchmark.csproj">
+      <Project>{acf7aa7a-e4f3-4bcb-bb5a-734b5c9f94c4}</Project>
+      <Name>Community.CsharpSqlite.Benchmark</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Community.CsharpSqlite\Community.CsharpSqlite.csproj">
       <Project>{F1653F20-D47D-4F29-8C55-3C835542AF5F}</Project>
       <Name>Community.CsharpSqlite</Name>

@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using Community.CsharpSqlite;
@@ -7,6 +8,14 @@ namespace Community.CsharpSQLite.UnitTests
 {
     public class Stress
     {
+        public static void Main(string[] args)
+        {
+            OpenDB(databaseName);
+            Insert_1000();
+            Console.ReadLine();
+        }
+
+
         private const string databaseName = "test.db";
 
         private const string INSERT_Command =
@@ -33,7 +42,7 @@ namespace Community.CsharpSQLite.UnitTests
             db.CloseDatabase();
         }
 
-        private SQLiteDatabase OpenDB(string fileName)
+        private static SQLiteDatabase OpenDB(string fileName)
         {
             if (File.Exists(fileName))
                 File.Delete(fileName);
@@ -52,7 +61,7 @@ namespace Community.CsharpSQLite.UnitTests
         }
 
         [Fact]
-        public void InsertRecords()
+        public static void InsertRecords()
         {
             var db = OpenDB(databaseName);
 
@@ -75,7 +84,7 @@ namespace Community.CsharpSQLite.UnitTests
         }
 
         [Fact]
-        public void Insert_1000()
+        public static void Insert_1000()
         {
             for (var i = 0; i < 1000; i++)
             {
