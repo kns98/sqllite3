@@ -1,46 +1,16 @@
 using System.Diagnostics;
 using System.IO;
-
-using Community.CsharpSQLite;
-using Xunit;
 using Community.CsharpSqlite;
+using Xunit;
 
 namespace Community.CsharpSQLite.UnitTests
 {
     public class Stress
     {
-        public Stress()
-        {
-            var db = OpenDB(databaseName);
-            InitializeTables(db);
-            db.CloseDatabase();
-        }
-
-        private SQLiteDatabase OpenDB(string fileName)
-        {
-            if (File.Exists(fileName))
-                File.Delete(fileName);
-
-            var db = new SQLiteDatabase(fileName);
-
-            for (int i = 0; i < PRAGMA_Commands.Length; i++)
-            {
-                db.ExecuteNonQuery(PRAGMA_Commands[i]);
-            }
-
-            return db;
-        }
-
-        private void InitializeTables(SQLiteDatabase db)
-        {
-            db.ExecuteNonQuery("BEGIN EXCLUSIVE");
-            for (int i = 0; i < CREATE_Commands.Length; i++)
-            {
-                db.ExecuteNonQuery(CREATE_Commands[i]);
-            }
-        }
-
         private const string databaseName = "test.db";
+
+        private const string INSERT_Command =
+            "INSERT INTO Root VALUES (?,?)";
 
         private static readonly string[] CREATE_Commands =
         {
@@ -56,8 +26,30 @@ namespace Community.CsharpSQLite.UnitTests
             "PRAGMA locking_mode=EXCLUSIVE"
         };
 
-        private const string INSERT_Command =
-            "INSERT INTO Root VALUES (?,?)";
+        public Stress()
+        {
+            var db = OpenDB(databaseName);
+            InitializeTables(db);
+            db.CloseDatabase();
+        }
+
+        private SQLiteDatabase OpenDB(string fileName)
+        {
+            if (File.Exists(fileName))
+                File.Delete(fileName);
+
+            var db = new SQLiteDatabase(fileName);
+
+            for (var i = 0; i < PRAGMA_Commands.Length; i++) db.ExecuteNonQuery(PRAGMA_Commands[i]);
+
+            return db;
+        }
+
+        private void InitializeTables(SQLiteDatabase db)
+        {
+            db.ExecuteNonQuery("BEGIN EXCLUSIVE");
+            for (var i = 0; i < CREATE_Commands.Length; i++) db.ExecuteNonQuery(CREATE_Commands[i]);
+        }
 
         [Fact]
         public void InsertRecords()
@@ -75,6 +67,7 @@ namespace Community.CsharpSQLite.UnitTests
                 stmt.BindText(2, key.ToString());
                 stmt.ExecuteStep();
             }
+
             stmt.Close();
             db.ExecuteNonQuery("END");
 

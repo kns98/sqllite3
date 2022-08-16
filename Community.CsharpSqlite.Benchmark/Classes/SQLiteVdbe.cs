@@ -7,9 +7,9 @@ namespace Community.CsharpSqlite
     /// </summary>
     public class SQLiteVdbe
     {
+        private readonly Sqlite3.Vdbe vm;
         private string LastError = "";
         private int LastResult;
-        private readonly Sqlite3.Vdbe vm;
 
         /// <summary>
         ///     Creates new instance of SQLiteVdbe class by compiling a statement
@@ -24,7 +24,7 @@ namespace Community.CsharpSqlite
 #if NET_35
             Sqlite3.sqlite3_prepare_v2
 #else
-Sqlite3.sqlite3_prepare_v2
+            Sqlite3.sqlite3_prepare_v2
 #endif
                 (db.Connection(), query, query.Length, ref vm, 0);
         }
@@ -52,7 +52,7 @@ Sqlite3.sqlite3_prepare_v2
 #if NET_35
                     Sqlite3.sqlite3_bind_int
 #else
-Sqlite3.sqlite3_bind_int
+                    Sqlite3.sqlite3_bind_int
 #endif
                         (vm, index, bInteger)) == Sqlite3.SQLITE_OK)
                 LastError = "";
@@ -74,7 +74,7 @@ Sqlite3.sqlite3_bind_int
 #if NET_35
                     Sqlite3.sqlite3_bind_int64
 #else
-Sqlite3.sqlite3_bind_int64
+                    Sqlite3.sqlite3_bind_int64
 #endif
                         (vm, index, bLong)) == Sqlite3.SQLITE_OK)
                 LastError = "";
@@ -95,7 +95,7 @@ Sqlite3.sqlite3_bind_int64
 #if NET_35
                     Sqlite3.sqlite3_bind_text
 #else
-Sqlite3.sqlite3_bind_text
+                    Sqlite3.sqlite3_bind_text
 #endif
                         (vm, index, bText, -1, null)) == Sqlite3.SQLITE_OK)
                 LastError = "";
@@ -116,7 +116,7 @@ Sqlite3.sqlite3_bind_text
 #if NET_35
                 Sqlite3.sqlite3_step
 #else
-Sqlite3.sqlite3_step
+                Sqlite3.sqlite3_step
 #endif
                     (vm);
             return LastResult;
@@ -133,7 +133,7 @@ Sqlite3.sqlite3_step
 #if NET_35
                 Sqlite3.sqlite3_column_int64
 #else
-Sqlite3.sqlite3_column_int64
+                Sqlite3.sqlite3_column_int64
 #endif
                     (vm, index);
         }
@@ -149,7 +149,7 @@ Sqlite3.sqlite3_column_int64
 #if NET_35
                 Sqlite3.sqlite3_column_text
 #else
-Sqlite3.sqlite3_column_text
+                Sqlite3.sqlite3_column_text
 #endif
                     (vm, index);
         }
@@ -176,7 +176,7 @@ Sqlite3.sqlite3_column_text
 #if NET_35
             Sqlite3.sqlite3_reset
 #else
-Sqlite3.sqlite3_reset
+            Sqlite3.sqlite3_reset
 #endif
                 (vm);
         }
@@ -191,7 +191,7 @@ Sqlite3.sqlite3_reset
 #if NET_35
             Sqlite3.sqlite3_finalize
 #else
-Sqlite3.sqlite3_finalize
+            Sqlite3.sqlite3_finalize
 #endif
                 (vm);
         }

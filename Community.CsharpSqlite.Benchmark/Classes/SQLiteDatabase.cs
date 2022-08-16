@@ -44,7 +44,7 @@ namespace Community.CsharpSqlite
 #if NET_35
                 Sqlite3.sqlite3_open
 #else
-Sqlite3.sqlite3_open
+                Sqlite3.sqlite3_open
 #endif
                     (DatabaseName, out db) != Sqlite3.SQLITE_OK)
             {
@@ -65,7 +65,7 @@ Sqlite3.sqlite3_open
 #if NET_35
                 Sqlite3.sqlite3_close
 #else
-Sqlite3.sqlite3_close
+                Sqlite3.sqlite3_close
 #endif
                     (db);
             }
@@ -111,7 +111,7 @@ Sqlite3.sqlite3_close
 #if NET_35
                                     Sqlite3.sqlite3_errmsg
 #else
-Sqlite3.sqlite3_errmsg
+                                    Sqlite3.sqlite3_errmsg
 #endif
                                         (db));
         }
@@ -157,7 +157,7 @@ Sqlite3.sqlite3_errmsg
 #if NET_35
                     Sqlite3.sqlite3_step
 #else
-Sqlite3.sqlite3_step
+                    Sqlite3.sqlite3_step
 #endif
                         (vm)) == Sqlite3.SQLITE_ROW)
             {
@@ -169,7 +169,7 @@ Sqlite3.sqlite3_step
 #if NET_35
                         Sqlite3.sqlite3_column_type
 #else
-Sqlite3.sqlite3_column_type
+                        Sqlite3.sqlite3_column_type
 #endif
                             (vm, i);
                     switch (columnType)
@@ -181,7 +181,7 @@ Sqlite3.sqlite3_column_type
 #if NET_35
                                 Sqlite3.sqlite3_column_int
 #else
-Sqlite3.sqlite3_column_int
+                                Sqlite3.sqlite3_column_int
 #endif
                                     (vm, i);
                             break;
@@ -193,7 +193,7 @@ Sqlite3.sqlite3_column_int
 #if NET_35
                                 Sqlite3.sqlite3_column_double
 #else
-Sqlite3.sqlite3_column_double
+                                Sqlite3.sqlite3_column_double
 #endif
                                     (vm, i);
                             break;
@@ -205,7 +205,7 @@ Sqlite3.sqlite3_column_double
 #if NET_35
                                 Sqlite3.sqlite3_column_text
 #else
-Sqlite3.sqlite3_column_text
+                                Sqlite3.sqlite3_column_text
 #endif
                                     (vm, i);
                             break;
@@ -217,7 +217,7 @@ Sqlite3.sqlite3_column_text
 #if NET_35
                                 Sqlite3.sqlite3_column_blob
 #else
-Sqlite3.sqlite3_column_blob
+                                Sqlite3.sqlite3_column_blob
 #endif
                                     (vm, i);
                             break;
@@ -248,7 +248,7 @@ Sqlite3.sqlite3_column_blob
 #if NET_35
                 Sqlite3.sqlite3_column_count
 #else
-Sqlite3.sqlite3_column_count
+                Sqlite3.sqlite3_column_count
 #endif
                     (vm);
             var columnValues = new object[columnCount];
@@ -262,14 +262,14 @@ Sqlite3.sqlite3_column_count
 #if NET_35
                         Sqlite3.sqlite3_column_name
 #else
-Sqlite3.sqlite3_column_name
+                        Sqlite3.sqlite3_column_name
 #endif
                             (vm, i);
                     columnType =
 #if NET_35
                         Sqlite3.sqlite3_column_type
 #else
-Sqlite3.sqlite3_column_type
+                        Sqlite3.sqlite3_column_type
 #endif
                             (vm, i);
 
