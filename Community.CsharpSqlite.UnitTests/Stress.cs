@@ -10,8 +10,8 @@ namespace Community.CsharpSQLite.UnitTests
     {
         public static void Main(string[] args)
         {
-            OpenDB(databaseName);
-            Insert_1000();
+            var db = OpenDB(databaseName);
+            InsertRecords(db);
             Console.ReadLine();
         }
 
@@ -61,10 +61,8 @@ namespace Community.CsharpSQLite.UnitTests
         }
 
         [Fact]
-        public static void InsertRecords()
+        public static void InsertRecords(SQLiteDatabase db)
         {
-            var db = OpenDB(databaseName);
-
             db.ExecuteNonQuery("BEGIN");
             var stmt = new SQLiteVdbe(db, INSERT_Command);
             long key = 1999;
@@ -75,22 +73,14 @@ namespace Community.CsharpSQLite.UnitTests
                 stmt.BindLong(1, key);
                 stmt.BindText(2, key.ToString());
                 stmt.ExecuteStep();
+                Console.WriteLine("Wrote one record");
             }
-
+            
             stmt.Close();
             db.ExecuteNonQuery("END");
 
             db.CloseDatabase();
         }
 
-        [Fact]
-        public static void Insert_1000()
-        {
-            for (var i = 0; i < 1000; i++)
-            {
-                Debug.WriteLine("Round " + i);
-                InsertRecords();
-            }
-        }
     }
 }
