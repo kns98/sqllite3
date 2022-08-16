@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSQLite.UnitTests", "Community.CsharpSQLite.UnitTests.csproj", "{59E27BF3-3D31-42E5-BA21-FAEE135E699F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSqlite", "..\Community.CsharpSqlite\Community.CsharpSqlite.csproj", "{F1653F20-D47D-4F29-8C55-3C835542AF5F}"
@@ -30,5 +32,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F28582CA-F8B0-4682-BA41-204CEED85E32}
 	EndGlobalSection
 EndGlobal
