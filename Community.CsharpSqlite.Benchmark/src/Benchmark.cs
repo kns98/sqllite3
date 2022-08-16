@@ -2,10 +2,10 @@
 
 using System;
 using System.Data;
-using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using Community.CsharpSqlite;
+using Microsoft.Data.Sqlite;
 
 /*
 * Benchmark Test for both SQLite and C#-SQLite
@@ -159,7 +159,7 @@ public class Benchmark
     timer[1, 3] = DateTime.Now.Ticks - start;
     db.CloseDatabase();
 #if NET_35
-    Sqlite3.Shutdown();
+        Sqlite3.sqlite3_shutdown();
 #else
 Sqlite3.sqlite3_shutdown();
 #endif
@@ -170,14 +170,15 @@ Sqlite3.sqlite3_shutdown();
     string databaseName = "Benchmark_SQLite.sqlite";
     if ( File.Exists( databaseName ) ) File.Delete( databaseName );
 
-    SQLiteConnectionStringBuilder constring = new SQLiteConnectionStringBuilder();
-    constring.PageSize = 1024;
-    constring.SyncMode = SynchronizationModes.Off;
+    SqliteConnectionStringBuilder constring = new SqliteConnectionStringBuilder();
+    //Commented out to compile. Check if legacy or so
+    //constring.PageSize = 1024;
+    //constring.SyncMode = SynchronizationModes.Off;
     constring.DataSource = databaseName;
 
-    SQLiteConnection con = new SQLiteConnection( constring.ToString() );
+    SqliteConnection con = new SqliteConnection( constring.ToString() );
     con.Open();
-    SQLiteCommand com = con.CreateCommand();
+    SqliteCommand com = con.CreateCommand();
     for ( i = 0; i < PRAGMA_Commands.Length; i++ )
     {
       com.CommandText = PRAGMA_Commands[i];
@@ -193,10 +194,10 @@ Sqlite3.sqlite3_shutdown();
     com.ExecuteNonQuery();
 
     com.CommandText = "INSERT INTO Root VALUES (?,?)";
-    SQLiteParameter p1 = com.CreateParameter();
+    SqliteParameter p1 = com.CreateParameter();
     p1.DbType = DbType.Int64;
     com.Parameters.Add( p1 );
-    SQLiteParameter p2 = com.CreateParameter();
+    SqliteParameter p2 = com.CreateParameter();
     p2.DbType = DbType.String;
     com.Parameters.Add( p2 );
 
@@ -217,7 +218,7 @@ Sqlite3.sqlite3_shutdown();
     com.CommandText = "BEGIN EXCLUSIVE";
     com.ExecuteNonQuery();
 
-    using ( SQLiteCommand com2 = con.CreateCommand() )
+    using ( SqliteCommand com2 = con.CreateCommand() )
     {
       com.CommandText = SELECT_Bind_i;
       com.Parameters.Clear();
@@ -235,13 +236,13 @@ Sqlite3.sqlite3_shutdown();
         key = ( 3141592621L * key + 2718281829L ) % 1000000007L;
         p1.Value = key;
         p2.Value = key.ToString();
-        using ( SQLiteDataReader res = com.ExecuteReader() )
+        using ( SqliteDataReader res = com.ExecuteReader() )
         {
           res.Read();
           res.GetValues( resValues );
         }
         long id = (long)resValues[0];
-        using ( SQLiteDataReader res = com2.ExecuteReader() )
+        using ( SqliteDataReader res = com2.ExecuteReader() )
         {
           res.Read();
           res.GetValues( resValues );
@@ -263,7 +264,7 @@ Sqlite3.sqlite3_shutdown();
     com.Parameters.Clear();
     key = Int64.MinValue;
     i = 0;
-    using ( SQLiteDataReader reader = com.ExecuteReader() )
+    using ( SqliteDataReader reader = com.ExecuteReader() )
     {
       object[] resValues = new object[2];
       while ( reader.Read() )
@@ -277,7 +278,7 @@ Sqlite3.sqlite3_shutdown();
       Debug.Assert( i == nRecords );
     }
     com.CommandText = SELECT_Command_s;
-    using ( SQLiteDataReader reader = com.ExecuteReader() )
+    using ( SqliteDataReader reader = com.ExecuteReader() )
     {
       i = 0;
       String strKey = "";

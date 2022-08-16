@@ -26,7 +26,7 @@ namespace Community.CsharpSqlite
 
       // prepare and compile 
 #if NET_35
-      Sqlite3.PrepareV2NoTail
+      Sqlite3.sqlite3_prepare_v2
 #else
 Sqlite3.sqlite3_prepare_v2
 #endif
@@ -54,7 +54,7 @@ Sqlite3.sqlite3_prepare_v2
     {
       if ( ( LastResult =
 #if NET_35
- Sqlite3.BindInt
+ Sqlite3.sqlite3_bind_int
 #else
 Sqlite3.sqlite3_bind_int
 #endif
@@ -78,7 +78,7 @@ Sqlite3.sqlite3_bind_int
     {
       if ( ( LastResult =
 #if NET_35
- Sqlite3.BindInt64
+ Sqlite3.sqlite3_bind_int64
 #else
 Sqlite3.sqlite3_bind_int64
 #endif
@@ -101,7 +101,7 @@ Sqlite3.sqlite3_bind_int64
     {
       if ( ( LastResult =
 #if NET_35
- Sqlite3.BindText
+ Sqlite3.sqlite3_bind_text
 #else
 Sqlite3.sqlite3_bind_text
 #endif
@@ -124,7 +124,7 @@ Sqlite3.sqlite3_bind_text
       // Execute the statement
       int LastResult =
 #if NET_35
- Sqlite3.Step
+ Sqlite3.sqlite3_step
 #else
 Sqlite3.sqlite3_step
 #endif
@@ -141,7 +141,7 @@ Sqlite3.sqlite3_step
     {
       return
 #if NET_35
- Sqlite3.ColumnInt64
+ Sqlite3.sqlite3_column_int64
 #else
 Sqlite3.sqlite3_column_int64
 #endif
@@ -157,7 +157,7 @@ Sqlite3.sqlite3_column_int64
     {
       return
 #if NET_35
- Sqlite3.ColumnText
+ Sqlite3.sqlite3_column_text
 #else
 Sqlite3.sqlite3_column_text
 #endif
@@ -184,7 +184,7 @@ Sqlite3.sqlite3_column_text
     {
       // Reset the statment so it's ready to use again
 #if NET_35
-      Sqlite3.Reset
+      Sqlite3.sqlite3_reset
 #else
 Sqlite3.sqlite3_reset
 #endif
@@ -199,7 +199,7 @@ Sqlite3.sqlite3_reset
     public void Close()
     {
 #if NET_35
-      Sqlite3.Finalize
+      Sqlite3.sqlite3_finalize
 #else
 Sqlite3.sqlite3_finalize
 #endif

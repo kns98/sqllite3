@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Community.CsharpSqlite"
   ],
-  "SelectedNode": "\\testfixture.sln",
+  "SelectedNode": "\\Community.CsharpSqlite\\Community.CsharpSqlite.sln",
   "PreviewInSolutionExplorer": false
 }

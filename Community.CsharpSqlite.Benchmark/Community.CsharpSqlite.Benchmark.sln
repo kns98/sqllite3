@@ -1,7 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSqlite.Benchmark", "Community.CsharpSqlite.Benchmark.csproj", "{F1653F20-D47D-4F29-8C55-3C835542AF5F}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSqlite.Benchmark", "Community.CsharpSqlite.Benchmark.csproj", "{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.CsharpSqlite", "..\Community.CsharpSqlite\Community.CsharpSqlite.csproj", "{F1653F20-D47D-4F29-8C55-3C835542AF5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +15,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Debug|x86.ActiveCfg = Debug|x86
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Debug|x86.Build.0 = Debug|x86
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Release|x86.ActiveCfg = Release|x86
+		{ACF7AA7A-E4F3-4BCB-BB5A-734B5C9F94C4}.Release|x86.Build.0 = Release|x86
 		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1653F20-D47D-4F29-8C55-3C835542AF5F}.Debug|x86.ActiveCfg = Debug|x86
@@ -22,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0BC852E-9235-49C3-81A7-747288FCF874}
 	EndGlobalSection
 EndGlobal

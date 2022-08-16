@@ -41,7 +41,7 @@ namespace Community.CsharpSqlite
       // opens database 
       if (
 #if NET_35
- Sqlite3.Open
+ Sqlite3.sqlite3_open
 #else
 Sqlite3.sqlite3_open
 #endif
@@ -62,7 +62,7 @@ Sqlite3.sqlite3_open
       if ( db != null )
       {
 #if NET_35
-        Sqlite3.Close
+        Sqlite3.sqlite3_close
 #else
 Sqlite3.sqlite3_close
 #endif
@@ -111,7 +111,7 @@ Sqlite3.sqlite3_close
       if ( db.errCode != Sqlite3.SQLITE_OK )
         throw new Exception( "Error with executing non-query: \"" + query + "\"!\n" +
 #if NET_35
- Sqlite3.Errmsg
+ Sqlite3.sqlite3_errmsg
 #else
 Sqlite3.sqlite3_errmsg
 #endif
@@ -155,7 +155,7 @@ Sqlite3.sqlite3_errmsg
       int resultType;
       if ( ( resultType =
 #if NET_35
- Sqlite3.Step
+ Sqlite3.sqlite3_step
 #else
 Sqlite3.sqlite3_step
 #endif
@@ -167,7 +167,7 @@ Sqlite3.sqlite3_step
         {
           int columnType =
 #if NET_35
- Sqlite3.ColumnType
+ Sqlite3.sqlite3_column_type
 #else
 Sqlite3.sqlite3_column_type
 #endif
@@ -179,7 +179,7 @@ Sqlite3.sqlite3_column_type
                 table.Columns[i].DataType = typeof( Int64 );
                 columnValues[i] =
 #if NET_35
- Sqlite3.ColumnInt
+ Sqlite3.sqlite3_column_int
 #else
 Sqlite3.sqlite3_column_int
 #endif
@@ -191,7 +191,7 @@ Sqlite3.sqlite3_column_int
                 table.Columns[i].DataType = typeof( Double );
                 columnValues[i] =
 #if NET_35
- Sqlite3.ColumnDouble
+ Sqlite3.sqlite3_column_double
 #else
 Sqlite3.sqlite3_column_double
 #endif
@@ -203,7 +203,7 @@ Sqlite3.sqlite3_column_double
                 table.Columns[i].DataType = typeof( String );
                 columnValues[i] =
 #if NET_35
- Sqlite3.ColumnText
+ Sqlite3.sqlite3_column_text
 #else
 Sqlite3.sqlite3_column_text
 #endif
@@ -215,7 +215,7 @@ Sqlite3.sqlite3_column_text
                 table.Columns[i].DataType = typeof( Byte[] );
                 columnValues[i] =
 #if NET_35
- Sqlite3.ColumnBlob
+ Sqlite3.sqlite3_column_blob
 #else
 Sqlite3.sqlite3_column_blob
 #endif
@@ -244,7 +244,7 @@ Sqlite3.sqlite3_column_blob
       // returns number of columns returned by statement
       int columnCount =
 #if NET_35
- Sqlite3.ColumnCount
+ Sqlite3.sqlite3_column_count
 #else
 Sqlite3.sqlite3_column_count
 #endif
@@ -258,14 +258,14 @@ Sqlite3.sqlite3_column_count
         {
           columnName =
 #if NET_35
- Sqlite3.ColumnName
+ Sqlite3.sqlite3_column_name
 #else
 Sqlite3.sqlite3_column_name
 #endif
 ( vm, i );
           columnType =
 #if NET_35
- Sqlite3.ColumnType
+ Sqlite3.sqlite3_column_type
 #else
 Sqlite3.sqlite3_column_type
 #endif
