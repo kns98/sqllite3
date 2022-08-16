@@ -31,90 +31,83 @@ using System.Data.Common;
 
 namespace Community.CsharpSqlite.SQLiteClient
 {
-	public sealed class SqliteTransaction : DbTransaction
-	{
-	
-		#region Fields
-		
-		private IsolationLevel _isolationLevel;
-		private SqliteConnection _connection;
-		private bool _open;
-		
-		#endregion
+    public sealed class SqliteTransaction : DbTransaction
+    {
+        #region Contructors and destructors
 
-		#region Contructors and destructors
-		
-		internal SqliteTransaction() 
-		{
-			_open = true;
-		}
+        internal SqliteTransaction()
+        {
+            _open = true;
+        }
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Fields
 
-		protected override DbConnection DbConnection
-		{
-			get { return _connection; } 
-		}
+        private IsolationLevel _isolationLevel;
+        private SqliteConnection _connection;
+        private bool _open;
 
-		public override IsolationLevel IsolationLevel
-		{
-			get { return _isolationLevel; }
-		}
+        #endregion
 
-		internal void SetConnection (DbConnection conn)
-		{
-			_connection = (SqliteConnection)conn;
-		}
+        #region Public Properties
 
-		internal void SetIsolationLevel (IsolationLevel level)
-		{
-			_isolationLevel = level;
-		}
+        protected override DbConnection DbConnection => _connection;
 
-		#endregion
-		
-		#region Public Methods
+        public override IsolationLevel IsolationLevel => _isolationLevel;
 
-		public override void Commit()
-		{
-			if (_connection == null || _connection.State != ConnectionState.Open)
-				throw new InvalidOperationException("Connection must be valid and open to commit transaction");
-			if (!_open)
-				throw new InvalidOperationException("Transaction has already been committed or is not pending");
-			try 
-			{
-				SqliteCommand cmd = (SqliteCommand)_connection.CreateCommand();
-				cmd.CommandText = "COMMIT";
-				cmd.ExecuteNonQuery();
-				_open = false;
-			}
-			catch (Exception ex) 
-			{
-				throw ex;
-			}
-		}
+        internal void SetConnection(DbConnection conn)
+        {
+            _connection = (SqliteConnection)conn;
+        }
 
-		public override void Rollback()
-		{
-			if (_connection == null || _connection.State != ConnectionState.Open)
-				throw new InvalidOperationException("Connection must be valid and open to commit transaction");
-			if (!_open)
-				throw new InvalidOperationException("Transaction has already been rolled back or is not pending");
-			try 
-			{
-				SqliteCommand cmd = (SqliteCommand)_connection.CreateCommand();
-				cmd.CommandText = "ROLLBACK";
-				cmd.ExecuteNonQuery();
-				_open = false;
-			}
-			catch (Exception ex) 
-			{
-				throw ex;
-			}
-		}
-		
-		#endregion
-	}
+        internal void SetIsolationLevel(IsolationLevel level)
+        {
+            _isolationLevel = level;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public override void Commit()
+        {
+            if (_connection == null || _connection.State != ConnectionState.Open)
+                throw new InvalidOperationException("Connection must be valid and open to commit transaction");
+            if (!_open)
+                throw new InvalidOperationException("Transaction has already been committed or is not pending");
+            try
+            {
+                var cmd = (SqliteCommand)_connection.CreateCommand();
+                cmd.CommandText = "COMMIT";
+                cmd.ExecuteNonQuery();
+                _open = false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public override void Rollback()
+        {
+            if (_connection == null || _connection.State != ConnectionState.Open)
+                throw new InvalidOperationException("Connection must be valid and open to commit transaction");
+            if (!_open)
+                throw new InvalidOperationException("Transaction has already been rolled back or is not pending");
+            try
+            {
+                var cmd = (SqliteCommand)_connection.CreateCommand();
+                cmd.CommandText = "ROLLBACK";
+                cmd.ExecuteNonQuery();
+                _open = false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+    }
 }

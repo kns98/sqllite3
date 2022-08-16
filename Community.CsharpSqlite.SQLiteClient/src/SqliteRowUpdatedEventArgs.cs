@@ -27,22 +27,22 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
 using System.Data;
 using System.Data.Common;
 
 namespace Community.CsharpSqlite.SQLiteClient
 {
-	/// <summary>
-	/// Provides data for the <see cref="SqliteDataAdapter.RowUpdated"/> event.
-	/// </summary>
-	public sealed class SqliteRowUpdatedEventArgs : RowUpdatedEventArgs
-	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="SqliteRowUpdatedEventArgs"/> class.
-		/// </summary>
-		public SqliteRowUpdatedEventArgs(DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) : base(row, command, statementType, tableMapping)
-		{
-		}
-	}
+    /// <summary>
+    ///     Provides data for the <see cref="SqliteDataAdapter.RowUpdated" /> event.
+    /// </summary>
+    public sealed class SqliteRowUpdatedEventArgs : RowUpdatedEventArgs
+    {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SqliteRowUpdatedEventArgs" /> class.
+        /// </summary>
+        public SqliteRowUpdatedEventArgs(DataRow row, IDbCommand command, StatementType statementType,
+            DataTableMapping tableMapping) : base(row, command, statementType, tableMapping)
+        {
+        }
+    }
 }

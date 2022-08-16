@@ -1,5 +1,3 @@
-using System;
-using System.Data;
 using System.Data.Common;
 
 namespace Community.CsharpSqlite.SQLiteClient
@@ -7,8 +5,6 @@ namespace Community.CsharpSqlite.SQLiteClient
     //This is the base exception of all sqlite exceptions
     public class SqliteException : DbException
     {
-        public int SqliteErrorCode { get; protected set; }
-
         public SqliteException(int errcode)
             : this(errcode, string.Empty)
         {
@@ -24,6 +20,8 @@ namespace Community.CsharpSqlite.SQLiteClient
             : this(0, message)
         {
         }
+
+        public int SqliteErrorCode { get; protected set; }
     }
 
     // This exception is raised whenever a statement cannot be compiled.
@@ -32,12 +30,13 @@ namespace Community.CsharpSqlite.SQLiteClient
         public SqliteSyntaxException(int errcode)
             : base(errcode)
         {
-
         }
+
         public SqliteSyntaxException(int errcode, string message)
             : base(errcode, message)
         {
         }
+
         public SqliteSyntaxException(string message)
             : base(message)
         {
@@ -52,14 +51,17 @@ namespace Community.CsharpSqlite.SQLiteClient
             : base(0)
         {
         }
+
         public SqliteExecutionException(int errcode)
             : base(errcode)
         {
         }
+
         public SqliteExecutionException(int errcode, string message)
             : base(errcode, message)
         {
         }
+
         public SqliteExecutionException(string message)
             : base(message)
         {
@@ -75,5 +77,4 @@ namespace Community.CsharpSqlite.SQLiteClient
         {
         }
     }
-
 }

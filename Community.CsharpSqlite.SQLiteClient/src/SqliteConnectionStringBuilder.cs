@@ -31,252 +31,296 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
 using System.Globalization;
 using System.Text;
 
 namespace Community.CsharpSqlite.SQLiteClient
 {
-	public sealed class SqliteConnectionStringBuilder : DbConnectionStringBuilder
-	{
-		private const string DEF_URI = null;
-		private const Int32 DEF_MODE = 0644;
-		private const Int32 DEF_VERSION = 2;
-		private const Encoding DEF_ENCODING = null;
-		private const Int32 DEF_BUSYTIMEOUT = 0;
+    public sealed class SqliteConnectionStringBuilder : DbConnectionStringBuilder
+    {
+        private const string DEF_URI = null;
+        private const int DEF_MODE = 0644;
+        private const int DEF_VERSION = 2;
+        private const Encoding DEF_ENCODING = null;
+        private const int DEF_BUSYTIMEOUT = 0;
 
-		#region // Fields
- 		private string 	_uri;
-		private Int32 _mode;
-		private Int32 _version;
-		private Encoding _encoding;
-		private Int32 _busy_timeout;
-		
-		private static Dictionary <string, string> _keywords; // for mapping duplicate keywords
-		#endregion // Fields
+        #region // Fields
 
-		#region Constructors
-		public SqliteConnectionStringBuilder () : this (String.Empty)
-		{
-		}
+        private string _uri;
+        private int _mode;
+        private int _version;
+        private Encoding _encoding;
+        private int _busy_timeout;
 
-		public SqliteConnectionStringBuilder (string connectionString)
-		{
-			Init ();
-			base.ConnectionString = connectionString;
-		}
+        private static readonly Dictionary<string, string> _keywords; // for mapping duplicate keywords
 
-		static SqliteConnectionStringBuilder ()
-		{
-			_keywords = new Dictionary <string, string> ();
-			_keywords ["URI"] 			= "Uri";
-			_keywords ["DATA SOURCE"]               = "Data Source";
-			_keywords ["DATASOURCE"]                = "Data Source";
-			_keywords ["URI"]                       = "Data Source";
-			_keywords ["MODE"]                      = "Mode";
-			_keywords ["VERSION"]                   = "Version";
-			_keywords ["BUSY TIMEOUT"]              = "Busy Timeout";
-			_keywords ["BUSYTIMEOUT"]               = "Busy Timeout";
-			_keywords ["ENCODING"]                  = "Encoding";
-		}
-		#endregion // Constructors
+        #endregion // Fields
 
-		#region Properties
-		public string DataSource { 
-			get { return _uri; }
-			set { 
-				base ["Data Source"] = value;
-				_uri = value; 
-			}
-		}
+        #region Constructors
 
-		public string Uri {
-			get { return _uri; }
-			set {
-				base ["Data Source"] = value;
-				_uri = value; 
-			}
-		}
+        public SqliteConnectionStringBuilder() : this(string.Empty)
+        {
+        }
 
-		public Int32 Mode {
-			get { return _mode; }
-			set {
-				base ["Mode"] = value;
-				_mode = value;
-			}
-		}
+        public SqliteConnectionStringBuilder(string connectionString)
+        {
+            Init();
+            ConnectionString = connectionString;
+        }
 
-		public Int32 Version {
-			get { return _version; }
-			set {
-				base ["Version"] = value;
-				_version = value;
-			}
-		}
+        static SqliteConnectionStringBuilder()
+        {
+            _keywords = new Dictionary<string, string>();
+            _keywords["URI"] = "Uri";
+            _keywords["DATA SOURCE"] = "Data Source";
+            _keywords["DATASOURCE"] = "Data Source";
+            _keywords["URI"] = "Data Source";
+            _keywords["MODE"] = "Mode";
+            _keywords["VERSION"] = "Version";
+            _keywords["BUSY TIMEOUT"] = "Busy Timeout";
+            _keywords["BUSYTIMEOUT"] = "Busy Timeout";
+            _keywords["ENCODING"] = "Encoding";
+        }
 
-		public Int32 BusyTimeout {
-			get { return _busy_timeout; }
-			set {
-				base ["Busy Timeout"] = value;
-				_busy_timeout = value;
-			}
-		}
+        #endregion // Constructors
 
-		public Encoding Encoding {
-			get { return _encoding; }
-			set {
-				base ["Encoding"] = value;
-				_encoding = value;
-			}
-		}
-		
-		public override bool IsFixedSize { 
-			get { return true; }
-		}
+        #region Properties
 
-		public override object this [string keyword] { 
-			get { 
-				string mapped = MapKeyword (keyword);
-				return base [mapped]; 
-			}
-			set {SetValue (keyword, value);}
-		}
+        public string DataSource
+        {
+            get => _uri;
+            set
+            {
+                base["Data Source"] = value;
+                _uri = value;
+            }
+        }
 
-		public override ICollection Keys { 
-			get { return base.Keys; }
-		}
-		
-		public override ICollection Values { 
-			get { return base.Values; }
-		}
-		#endregion // Properties
+        public string Uri
+        {
+            get => _uri;
+            set
+            {
+                base["Data Source"] = value;
+                _uri = value;
+            }
+        }
 
-		#region Methods
-		private void Init ()
-		{
-			_uri = DEF_URI;
-			_mode = DEF_MODE;
-			_version = DEF_VERSION;
-			_encoding = DEF_ENCODING;
-			_busy_timeout = DEF_BUSYTIMEOUT;
-		}
+        public int Mode
+        {
+            get => _mode;
+            set
+            {
+                base["Mode"] = value;
+                _mode = value;
+            }
+        }
 
-		public override void Clear ()
-		{
-			base.Clear ();
-			Init ();
-		}
+        public int Version
+        {
+            get => _version;
+            set
+            {
+                base["Version"] = value;
+                _version = value;
+            }
+        }
 
-		public override bool ContainsKey (string keyword)
-		{
-			keyword = keyword.ToUpper ().Trim ();
-			if (_keywords.ContainsKey (keyword))
-				return base.ContainsKey (_keywords [keyword]);
-			return false;
-		}
+        public int BusyTimeout
+        {
+            get => _busy_timeout;
+            set
+            {
+                base["Busy Timeout"] = value;
+                _busy_timeout = value;
+            }
+        }
 
-		public override bool Remove (string keyword)
-		{
-			if (!ContainsKey (keyword))
-				return false;
-			this [keyword] = null;
-			return true;
-		}
+        public Encoding Encoding
+        {
+            get => _encoding;
+            set
+            {
+                base["Encoding"] = value;
+                _encoding = value;
+            }
+        }
 
-		public override bool TryGetValue (string keyword, out object value)
-		{
-			if (! ContainsKey (keyword)) {
-				value = String.Empty;
-				return false;
-			}
-			return base.TryGetValue (_keywords [keyword.ToUpper ().Trim ()], out value);
-		}
+        public override bool IsFixedSize => true;
 
-		#endregion // Methods
+        public override object this[string keyword]
+        {
+            get
+            {
+                var mapped = MapKeyword(keyword);
+                return base[mapped];
+            }
+            set => SetValue(keyword, value);
+        }
 
-		#region Private Methods
-		private string MapKeyword (string keyword)
-		{
-			keyword = keyword.ToUpper ().Trim ();
-			if (! _keywords.ContainsKey (keyword))
-				throw new ArgumentException("Keyword not supported :" + keyword);
-			return _keywords [keyword];
-		}
-		
-		private void SetValue (string key, object value)
-		{
-			if (key == null)
-				throw new ArgumentNullException ("key cannot be null!");
+        public override ICollection Keys => base.Keys;
 
-			string mappedKey = MapKeyword (key);
+        public override ICollection Values => base.Values;
 
-			switch (mappedKey.ToUpper (CultureInfo.InvariantCulture).Trim ()) {
-				case "DATA SOURCE":
-					if (value == null) {
-						_uri = DEF_URI;
-						base.Remove (mappedKey);
-					} else
-						this.Uri = value.ToString ();
-					break;				
+        #endregion // Properties
 
-				case "MODE":
-					if (value == null) {
-						_mode = DEF_MODE;
-						base.Remove (mappedKey);
-					} else 
-						this.Mode = ConvertToInt32 (value);
-					break;
+        #region Methods
 
-				case "VERSION":
-					if (value == null) {
-						_version = DEF_MODE;
-						base.Remove (mappedKey);
-					} else 
-						this.Version = ConvertToInt32 (value);
-					break;
-					
-				case "BUSY TIMEOUT":
-					if (value == null) {
-						_busy_timeout = DEF_BUSYTIMEOUT;
-						base.Remove (mappedKey);
-					} else 
-						this.BusyTimeout = ConvertToInt32 (value);
-					break;
-					
-				case "ENCODING" :
-					if (value == null) {
-						_encoding = DEF_ENCODING;
-						base.Remove (mappedKey);
-					} else if (value is string) {
-						this.Encoding = Encoding.GetEncoding ((string) value);
-					} else
-						throw new ArgumentException ("Cannot set encoding from a non-string argument");
-					
-					break;
+        private void Init()
+        {
+            _uri = DEF_URI;
+            _mode = DEF_MODE;
+            _version = DEF_VERSION;
+            _encoding = DEF_ENCODING;
+            _busy_timeout = DEF_BUSYTIMEOUT;
+        }
 
-				default :
-					throw new ArgumentException("Keyword not supported :" + key);
-			}
-		}
+        public override void Clear()
+        {
+            base.Clear();
+            Init();
+        }
 
-		static int ConvertToInt32 (object value) 
-		{
-			return Int32.Parse (value.ToString (), CultureInfo.InvariantCulture);
-		}
+        public override bool ContainsKey(string keyword)
+        {
+            keyword = keyword.ToUpper().Trim();
+            if (_keywords.ContainsKey(keyword))
+                return base.ContainsKey(_keywords[keyword]);
+            return false;
+        }
 
-		static bool ConvertToBoolean (object value) 
-		{
-			if (value == null)
-				throw new ArgumentNullException ("null value cannot be converted to boolean");
-			string upper = value.ToString ().ToUpper ().Trim ();
-			if (upper == "YES" || upper == "TRUE")
-				return true;
-			if (upper == "NO" || upper == "FALSE")
-				return false;
-			throw new ArgumentException (String.Format ("Invalid boolean value: {0}", value.ToString ()));
-		}
-		#endregion // Private Methods
-	}
- 
+        public override bool Remove(string keyword)
+        {
+            if (!ContainsKey(keyword))
+                return false;
+            this[keyword] = null;
+            return true;
+        }
+
+        public override bool TryGetValue(string keyword, out object value)
+        {
+            if (!ContainsKey(keyword))
+            {
+                value = string.Empty;
+                return false;
+            }
+
+            return base.TryGetValue(_keywords[keyword.ToUpper().Trim()], out value);
+        }
+
+        #endregion // Methods
+
+        #region Private Methods
+
+        private string MapKeyword(string keyword)
+        {
+            keyword = keyword.ToUpper().Trim();
+            if (!_keywords.ContainsKey(keyword))
+                throw new ArgumentException("Keyword not supported :" + keyword);
+            return _keywords[keyword];
+        }
+
+        private void SetValue(string key, object value)
+        {
+            if (key == null)
+                throw new ArgumentNullException("key cannot be null!");
+
+            var mappedKey = MapKeyword(key);
+
+            switch (mappedKey.ToUpper(CultureInfo.InvariantCulture).Trim())
+            {
+                case "DATA SOURCE":
+                    if (value == null)
+                    {
+                        _uri = DEF_URI;
+                        base.Remove(mappedKey);
+                    }
+                    else
+                    {
+                        Uri = value.ToString();
+                    }
+
+                    break;
+
+                case "MODE":
+                    if (value == null)
+                    {
+                        _mode = DEF_MODE;
+                        base.Remove(mappedKey);
+                    }
+                    else
+                    {
+                        Mode = ConvertToInt32(value);
+                    }
+
+                    break;
+
+                case "VERSION":
+                    if (value == null)
+                    {
+                        _version = DEF_MODE;
+                        base.Remove(mappedKey);
+                    }
+                    else
+                    {
+                        Version = ConvertToInt32(value);
+                    }
+
+                    break;
+
+                case "BUSY TIMEOUT":
+                    if (value == null)
+                    {
+                        _busy_timeout = DEF_BUSYTIMEOUT;
+                        base.Remove(mappedKey);
+                    }
+                    else
+                    {
+                        BusyTimeout = ConvertToInt32(value);
+                    }
+
+                    break;
+
+                case "ENCODING":
+                    if (value == null)
+                    {
+                        _encoding = DEF_ENCODING;
+                        base.Remove(mappedKey);
+                    }
+                    else if (value is string)
+                    {
+                        Encoding = Encoding.GetEncoding((string)value);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Cannot set encoding from a non-string argument");
+                    }
+
+                    break;
+
+                default:
+                    throw new ArgumentException("Keyword not supported :" + key);
+            }
+        }
+
+        private static int ConvertToInt32(object value)
+        {
+            return int.Parse(value.ToString(), CultureInfo.InvariantCulture);
+        }
+
+        private static bool ConvertToBoolean(object value)
+        {
+            if (value == null)
+                throw new ArgumentNullException("null value cannot be converted to boolean");
+            var upper = value.ToString().ToUpper().Trim();
+            if (upper == "YES" || upper == "TRUE")
+                return true;
+            if (upper == "NO" || upper == "FALSE")
+                return false;
+            throw new ArgumentException(string.Format("Invalid boolean value: {0}", value));
+        }
+
+        #endregion // Private Methods
+    }
 }

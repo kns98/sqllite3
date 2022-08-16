@@ -28,15 +28,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-using System.Data;
 using System.Data.Common;
 
 namespace Community.CsharpSqlite.SQLiteClient
 {
-	/// <summary>
-	/// Represents the method that will handle the <see cref="SqliteDataAdapter.RowUpdating"/> event 
-	/// of a <see cref="SqliteDataAdapter"/>.
-	/// </summary>
-	public delegate void SqliteRowUpdatingEventHandler(Object sender, RowUpdatingEventArgs e);
+    /// <summary>
+    ///     Represents the method that will handle the <see cref="SqliteDataAdapter.RowUpdating" /> event
+    ///     of a <see cref="SqliteDataAdapter" />.
+    /// </summary>
+    public delegate void SqliteRowUpdatingEventHandler(object sender, RowUpdatingEventArgs e);
 }

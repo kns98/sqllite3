@@ -8,11 +8,9 @@
 // (C) 2004 Novell (http://www.novell.com)
 //
 
-using System;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion( "3.7.7.1" )]
+[assembly: AssemblyVersion("3.7.7.1")]
 
 /* TODO COMPLETE INFORMATION
 
