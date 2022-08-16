@@ -1,13 +1,9 @@
-using System;
-using System.Diagnostics;
-using System.Text;
-
 namespace Community.CsharpSqlite
 {
-  using sqlite3_value = Sqlite3.Mem;
+    using sqlite3_value = Sqlite3.Mem;
 
-  public partial class Sqlite3
-  {
+    public partial class Sqlite3
+    {
 /*
 ** 2003 January 11
 **
@@ -38,7 +34,6 @@ namespace Community.CsharpSqlite
 ** macro.
 */
 #if !SQLITE_OMIT_AUTHORIZATION
-
 /*
 ** Set or clear the access authorization function.
 **
@@ -173,7 +168,7 @@ return;
 pTab = pParse->pTriggerTab;
   }else{
 Debug.Assert( pTabList );
-for(iSrc=0; ALWAYS(iSrc<pTabList->nSrc); iSrc++){
+for(iSrc = 0; ALWAYS(iSrc<pTabList->nSrc); iSrc++){
   if( pExpr->iTable==pTabList->a[iSrc].iCursor ){
     pTab = pTabList->a[iSrc].pTab;
 	break;
@@ -263,5 +258,5 @@ pContext->pParse = 0;
 }
 
 #endif //* SQLITE_OMIT_AUTHORIZATION */
-  }
+    }
 }
